@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bio</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            perspective: 1000px;
+            background: black;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: black;
+            opacity: 0.7;
+        }
+
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 1.5s ease;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .container:active {
+            transform: perspective(800px) scale(0.98);
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            transition: transform 0.2s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.15) rotateZ(-10deg);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #ffdd57;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            margin: 10px 0 20px;
+            line-height: 1.8;
+            color: #ddd;
+        }
+
+        .links a {
+            display: inline-block;
+            text-decoration: none;
+            margin: 10px;
+            padding: 12px 20px;
+            color: #fff;
+            background: #e63946;
+            border-radius: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease, transform 0.3s ease;
+        }
+
+        .links a:hover {
+            background: #f55a4e;
+            transform: translateY(-5px) scale(1.1) rotateZ(-5deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #bbb;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        footer a {
+            color: #e63946;
+            text-decoration: none;
+        }
+
+        audio {
+            display: none;
+        }
+
+        /* Mouse tracking effect */
+        .container {
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+        }
+    </style>
+    <script>
+        document.addEventListener('mousemove', (event) => {
+            const x = (event.clientX / window.innerWidth) - 0.5;
+            const y = (event.clientY / window.innerHeight) - 0.5;
+
+            const container = document.querySelector('.container');
+            const rotateX = -y * 15; // Rotate more on the Y-axis
+            const rotateY = x * 15;  // Rotate more on the X-axis
+
+            container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+    </script>
+</head>
+<body>
+    <video autoplay loop muted>
+        <source src="your-background-video.mp4" type="video/mp4">
+    </video>
+    <audio autoplay loop>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+    </audio>
+    <div class="container">
+        <img src="your-profile-image.jpg" alt="Your Name" class="profile-image">
+        <h1>Your Name</h1>
+        <p>Your short bio goes here. Mention something cool about yourself or what you do.</p>
+
+        <div class="links">
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">GitHub</a>
+            <a href="#" target="_blank">Portfolio</a>
+            <a href="#" target="_blank">Email</a>
+        </div>
+
+        <footer>
+            Made with ❤️ by <a href="https://yourwebsite.com" target="_blank">YourName</a>
+        </footer>
+    </div>
+</body>
+</html>
